@@ -1,8 +1,11 @@
+let
+  nixpkgs = (import <nixpkgs> {});
+in
 {
   d = derivation {
     name = "foo";
-    builder = "${(import <nixpkgs> {}).bash}/bin/bash";
-    coreutils = ((import <nixpkgs> {}).coreutils);
+    builder = "${nixpkgs.bash}/bin/bash";
+    coreutils = nixpkgs.coreutils;
     args = [ ./build.sh ];
     system = builtins.currentSystem;
   };
